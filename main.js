@@ -54,21 +54,20 @@ colgroup.appendChild(colSpan_3); //3.oszlop hozzáadása a Colgouphoz.
 const thead = document.createElement('thead'); //Fejléc létrehozása.
 table.appendChild(thead); //Fejléc hozzáadása a táblázathoz.
 
-const tr = document.createElement('tr'); //Fejlécben lévő sor létrehozása.
-thead.appendChild(tr); //Fejlécben lévő sor hozzáadása a fejléchez.
-
-const th_1 = document.createElement('th'); //A fejléc sorában lévő 1.cella létrehozása.
-th_1.innerHTML = head.nemzetiseg; //A cella tartalmának megadása a fejléc nemzetiségének az értékével.
-tr.appendChild(th_1); //A fejléc sorában lévő 1.cella hozzáadása a fejlécben lévő sorhoz.
-
-const th_2 = document.createElement('th'); //A fejléc sorában lévő 2.cella létrehozása.
-th_2.innerHTML = head.szerzo; //A cella tartalmának megadása a fejléc szerzőjének az értékével.
-th_2.className = "cell"; //className megadása az 2.oszlop 1.cellájának.
-tr.appendChild(th_2); //A fejléc sorában lévő 2.cella hozzáadása a fejlécben lévő sorhoz.
-
-const th_3 = document.createElement('th'); //A fejléc sorában lévő 3.cella létrehozása.
-th_3.innerHTML = head.mu; //A cella tartalmának megadása a fejléc művének az értékével.
-tr.appendChild(th_3); //A fejléc sorában lévő 3.cella hozzáadása a fejlécben lévő sorhoz.
+function generateHeader(){ //A generateHeader függvény meghatározása.
+    const header = ["Nemzetiség", "Szerző", "Mű"]; //A header változóba, a tömb tartalmának az eltárolása.
+    const tr = document.createElement('tr'); //Fejlécben lévő sor létrehozása.
+    thead.appendChild(tr); //Fejlécben lévő sor hozzáadása a fejléchez.
+    for(const head of header){ //Végighaladás a headeren, a head az aktuális elem.
+        const th = document.createElement('th') //Új cella létrehozása.
+        th.innerHTML = head; //A cella tartalmának megadása a headnek az értékével.
+        if(head === "Szerző"){ //Ha a head egyenlő a szerzővel.
+            th.className = "cell"; //className megadása a fejléc szerző cellájának.
+        }
+        tr.appendChild(th); //Cellák hozzáadása a fejlécben lévő sorhoz.
+    }
+}
+generateHeader(); //A generateHeader függvény meghívása.
 
 const tbody = document.createElement('tbody'); //Törzs létrehozása.
 table.appendChild(tbody); //Törzs hozzáadása a táblázathoz.

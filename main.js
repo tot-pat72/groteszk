@@ -135,6 +135,24 @@ form.addEventListener('submit', function(e) { //A függvény meghívódik, a sub
         valid = false; //A valid változó értéke false lesz.
     }
 
+    if(szerzo_2HtmlElement.value === '' && mu_2HtmlElement.value !== ''){ //Ha a szerzo_2 beviteli mezője üres, viszont a mu_2 meg nem.
+        const parentElement = szerzo_2HtmlElement.parentElement; //A szerzo_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
+        const errorplace = parentElement.querySelector('.error'); //A szerzo_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
+        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
+            errorplace.innerHTML = "A szerző és a hozzá tartozó mű megadása kötelező"; //Akkor a szerző és a hozzá tartozó mű megadása kötelező hibaüzenetet dobja ki.
+        }
+        valid = false; //A valid változó értéke false lesz.
+    };
+    
+    if(mu_2HtmlElement.value === '' && szerzo_2HtmlElement.value !== ''){ //Ha a mu_2 beviteli mezője üres, viszont a szerzo_2 meg nem.
+        const parentElement = mu_2HtmlElement.parentElement; //A mu_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
+        const errorplace = parentElement.querySelector('.error'); //A mu_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
+        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
+            errorplace.innerHTML = "A szerző és a hozzá tartozó mű megadása kötelező"; //Akkor szerző és a hozzá tartozó mű megadása kötelező hibaüzenetet dobja ki.
+        }
+        valid = false; //A valid változó értéke false lesz.
+    };
+
     if(valid){ //Ha a valid változó értéke igaz(nem volt kihagyott mező).
         const nemzetisegValue = nemzetisegHtmlElement.value; //A nemzetisegHtmlElement értékének belerakása egy változóba.
         const szerzo_1Value = szerzo_1HtmlElement.value; //A szerzo_1HtmlElement értékének belerakása egy változóba.

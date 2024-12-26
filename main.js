@@ -135,23 +135,9 @@ form.addEventListener('submit', function(e) { //A függvény meghívódik, a sub
         valid = false; //A valid változó értéke false lesz.
     }
 
-    if(szerzo_2HtmlElement.value === '' && mu_2HtmlElement.value !== ''){ //Ha a szerzo_2 beviteli mezője üres, viszont a mu_2 meg nem.
-        const parentElement = szerzo_2HtmlElement.parentElement; //A szerzo_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A szerzo_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = "A szerző és a hozzá tartozó mű megadása kötelező"; //Akkor a szerző és a hozzá tartozó mű megadása kötelező hibaüzenetet dobja ki.
-        }
+    if(!getNonEmptyFormHTMLField(szerzo_2HtmlElement, mu_2HtmlElement, "A szerző és a hozzá tartozó mű megadása kötelező")){ //Ha getNonEmptyFormHTMLField függvény hamissal tér vissza, mind a bemeneti szerzo_2HtmlElement és az mu_2HtmlElement esetén is.
         valid = false; //A valid változó értéke false lesz.
-    };
-    
-    if(mu_2HtmlElement.value === '' && szerzo_2HtmlElement.value !== ''){ //Ha a mu_2 beviteli mezője üres, viszont a szerzo_2 meg nem.
-        const parentElement = mu_2HtmlElement.parentElement; //A mu_2 beviteli mező parentElement property-jének az eltárolása egy változóban.
-        const errorplace = parentElement.querySelector('.error'); //A mu_2 beviteli mező parentElement div-jében az error classal ellátott elem megkeresése és annak eltárolása egy változóban.
-        if (errorplace != undefined){ //Ha talál ilyen mezőt(nem undefined).
-            errorplace.innerHTML = "A szerző és a hozzá tartozó mű megadása kötelező"; //Akkor szerző és a hozzá tartozó mű megadása kötelező hibaüzenetet dobja ki.
-        }
-        valid = false; //A valid változó értéke false lesz.
-    };
+    }
 
     if(valid){ //Ha a valid változó értéke igaz(nem volt kihagyott mező).
         const nemzetisegValue = nemzetisegHtmlElement.value; //A nemzetisegHtmlElement értékének belerakása egy változóba.
@@ -184,5 +170,16 @@ function validateFormHTMLField(inputHTMLElement, errormessage){ //A validateForm
         }
         valid = false; //A valid változó értéke false lesz.
     }
+    return valid; //Visszatérés a valid változóval. Amely hamis, hogyha nem ment át a validáción. Ha meg ki van töltve, akkor igazzal tér vissza.
+}
+
+function getNonEmptyFormHTMLField(szerzo_2, mu_2, errormessage){ //A getNonEmptyFormHTMLField függvény meghatározása.
+    let valid = true; //A valid változó létrehozása, ami a true értéket kapja.
+    if (!validateFormHTMLField(szerzo_2, errormessage) && mu_2.value !== ''){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti szerzo_2 esetén és a mu_2.value nem egyenlő egy üres stringgel.
+        valid = false; //A valid változó értéke false lesz.
+    };
+    if (!validateFormHTMLField(mu_2, errormessage) && szerzo_2.value !== ''){ //Ha validateFormHTMLField függvény hamissal tér vissza, a bemeneti mu_2 esetén és a szerzo_2.value nem egyenlő egy üres stringgel.
+        valid = false; //A valid változó értéke false lesz.
+    };
     return valid; //Visszatérés a valid változóval. Amely hamis, hogyha nem ment át a validáción. Ha meg ki van töltve, akkor igazzal tér vissza.
 }

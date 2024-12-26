@@ -1,0 +1,17 @@
+table, th, td{
+    border-collapse: collapse;
+    border: 1px darkblue solid;
+}
+
+.error{
+    color: red;
+    text-shadow: 1px 1px 1px;
+}
+
+.columns{
+    background-color: red;
+}
+
+.cell{
+    background-color: red;
+}
